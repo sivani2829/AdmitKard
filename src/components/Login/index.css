@@ -1,0 +1,15 @@
+.sign-in {
+  background-color: #ffb84d;
+  color: white;
+  width: 250px;
+  height: 35px;
+  border-radius: 19px;
+  border: 1px solid #ffb84d;
+}
+.change {
+  color: #ffb84d;
+  text-decoration: underline;
+}
+.bg-container {
+  height: 90vh;
+}
