@@ -116,7 +116,6 @@ class Login extends React.Component {
     };
     const app = initializeApp(firebaseConfig);
     this.auth = getAuth(app);
-    // this.configureCaptcha();
   }
 
   configureCaptcha = () => {
@@ -125,7 +124,7 @@ class Login extends React.Component {
       auth,
       "recaptcha-container",
       {
-        size: "invisible",
+        size: "normal",
         callback: (response) => {
           console.log("captcha verified");
           this.onSignInSubmit();
@@ -144,10 +143,9 @@ class Login extends React.Component {
     const phoneNumber = "+91" + this.state.mobile;
     console.log(phoneNumber);
     const appVerifier = window.recaptchaVerifier;
-
+    console.log("verrifier", appVerifier);
     const auth = getAuth();
     signInWithPhoneNumber(auth, phoneNumber, appVerifier)
-      // signInWithPhoneNumber(auth, phoneNumber)
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
         console.log("otp  successfully sent");
