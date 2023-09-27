@@ -178,7 +178,6 @@ class Login extends React.Component {
     const { isSignin, isotp, isSuccess } = this.state;
     return (
       <div className="bg-container d-flex flex-column justify-content-center align-items-center">
-        <div id="recaptcha-container"></div>
         {isSignin && this.signInPage()}
         {isotp && this.otpPage()}
         {isSuccess && this.successPage()}
