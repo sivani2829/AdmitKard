@@ -136,7 +136,7 @@ class Login extends React.Component {
         },
         // defaultCountry:'IN'
         "expired-callback": () => {},
-        // defaultCountry: "IN",
+        defaultCountry: "IN",
       }
     );
   };
@@ -166,7 +166,6 @@ class Login extends React.Component {
     window.confirmationResult
       .confirm(code)
       .then((result) => {
-        // User signed in successfully.
         const user = result.user;
         console.log(JSON.stringify(user));
 
