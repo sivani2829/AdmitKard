@@ -21,7 +21,6 @@ class Login extends React.Component {
   signInPage = () => {
     return (
       <div>
-        <div id="recaptcha-container"></div>
         <div className="d-flex flex-column justify-content-center align-items-center">
           <img
             src="https://tse1.mm.bing.net/th?id=OIP.szYvtm6FyEJuuUY3PEg9RwHaE2&pid=Api&P=0&h=180"
@@ -45,11 +44,7 @@ class Login extends React.Component {
             <p className="text-center m-1 text-dark">
               we will send you a one time SMS message.Charges May apply
             </p>
-            <button
-              type="submit"
-              className="sign-in m-4"
-              onClick={this.signInOtp}
-            >
+            <button type="submit" className="sign-in m-4">
               Sign in with OTP
             </button>
           </form>
@@ -121,6 +116,7 @@ class Login extends React.Component {
     };
     const app = initializeApp(firebaseConfig);
     this.auth = getAuth(app);
+    // this.configureCaptcha();
   }
 
   configureCaptcha = () => {
@@ -129,17 +125,18 @@ class Login extends React.Component {
       auth,
       "recaptcha-container",
       {
-        size: "normal",
+        size: "invisible",
         callback: (response) => {
-          this.onSignInSubmit();
           console.log("captcha verified");
+          this.onSignInSubmit();
         },
-        // defaultCountry:'IN'
+
         "expired-callback": () => {},
         defaultCountry: "IN",
       }
     );
   };
+
   onSignInSubmit = (e) => {
     e.preventDefault();
     this.configureCaptcha();
@@ -150,6 +147,7 @@ class Login extends React.Component {
 
     const auth = getAuth();
     signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+      // signInWithPhoneNumber(auth, phoneNumber)
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
         console.log("otp  successfully sent");
@@ -178,6 +176,7 @@ class Login extends React.Component {
     const { isSignin, isotp, isSuccess } = this.state;
     return (
       <div className="bg-container d-flex flex-column justify-content-center align-items-center">
+        <div id="recaptcha-container"></div>
         {isSignin && this.signInPage()}
         {isotp && this.otpPage()}
         {isSuccess && this.successPage()}
